@@ -1,3 +1,7 @@
-# shanghai_in_W
-상라해
-update readme by yunseo
+# shanghai trip-Day 2.시간이 멈춘 옛 풍경
+-숙소에서 주자자오 도착
+-우캉멘션에서 사진 찍기와 쇼핑
+-파기름 국수 먹고 신천지 거리 구경
+-티엔즈팡 쇼핑
+-하이디라오에서 식사
+-예원 
