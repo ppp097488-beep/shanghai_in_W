@@ -1,0 +1,257 @@
+/* ==========================================================
+   🎨 STYLE.CSS – ‘꿈속에서 다시 걷는 상하이’ 디자인 스타일
+   모든 색감·효과·애니메이션을 원하는 만큼 수정할 수 있도록
+   항목별로 주석을 세세하게 기록해 두었습니다!
+   ========================================================== */
+
+
+/* ===========================
+   🔮 전역 기본 스타일
+   =========================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/*  
+  🎨 색깔을 바꾸고 싶다면 여기 root만 수정하면 전체가 변합니다!
+  - 파스텔 계열 배경 gradient 구성 색
+  - 카드 글래스모피즘 색상
+*/
+:root {
+  --bg-lavender: #d9d4ff;      /* 연보라 */
+  --bg-pink: #ffd6e8;          /* 연핑크 */
+  --bg-blue: #cde9ff;          /* 연하늘 */
+  --text-main: #1f1b2e;        /* 본문 기본 글자색 */
+  --glass-bg: rgba(255, 255, 255, 0.25); /* 카드 배경 투명도 */
+  --glass-border: rgba(255, 255, 255, 0.3); /* 카드 테두리 */
+}
+
+body {
+  font-family: "Noto Sans KR", sans-serif;
+  overflow-x: hidden;
+  color: var(--text-main);
+}
+
+
+/* ===========================
+   🔮 고정된 몽환 배경
+   conic-gradient + blur
+   =========================== */
+body::before {
+  content: "";
+  position: fixed;
+  inset: -10%;
+  z-index: -2;
+
+  /* ✨ 오로라 느낌의 배경 → 색을 바꾸고 싶으면 var()를 수정! */
+  background: conic-gradient(
+    from 200deg at 10% 20%,
+    #ffffff80,
+    var(--bg-pink),
+    var(--bg-lavender),
+    var(--bg-blue),
+    #ffffff90,
+    var(--bg-pink)
+  );
+
+  filter: blur(45px); /* 흐림 강도 */
+  transform: scale(1.15); /* 퍼짐 정도 */
+}
+
+
+/* ===========================
+   🔮 둥둥 떠다니는 오브젝트
+   =========================== */
+.floating-orb {
+  position: fixed;
+  border-radius: 50%;
+  background: radial-gradient(circle, #ffffff, #ffffff00);
+  opacity: 0.35;
+  z-index: -1;
+
+  /* 떠다니는 애니메이션 */
+  animation: float-orb 18s ease-in-out infinite alternate;
+}
+
+/* 오브젝트 위치 조정 (추가·삭제 가능) */
+.orb-1 {
+  width: 220px;
+  height: 220px;
+  top: 10%;
+  left: 5%;
+  animation-delay: -4s;
+}
+
+.orb-2 {
+  width: 260px;
+  height: 260px;
+  bottom: 5%;
+  right: 8%;
+  animation-delay: -8s;
+}
+
+.orb-3 {
+  width: 160px;
+  height: 160px;
+  top: 45%;
+  right: 20%;
+  animation-duration: 22s;
+}
+
+/* 무중력처럼 둥둥 떠다니는 keyframes */
+@keyframes float-orb {
+  0% { transform: translate(0,0); }
+  50% { transform: translate(20px,-20px) scale(1.1); }
+  100% { transform: translate(-10px,15px) scale(0.95); }
+}
+
+
+/* ===========================
+   ⭐ HERO 영역 (제목 화면)
+   =========================== */
+header.hero {
+  height: 100vh; /* 화면 꽉 채우기 */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 2rem;
+}
+
+/* 제목 스타일 */
+header.hero h1 {
+  font-family: "Playfair Display", "Noto Serif KR", serif;
+  font-size: 3rem;
+  color: #fff;
+
+  /* ✨ 빛나는 글자 효과 → 색 바꾸고 싶으면 여기 */
+  text-shadow: 0 0 18px rgba(120, 80, 255, 0.8);
+
+  animation: float-title 6s ease-in-out infinite;
+}
+
+/* 제목이 둥둥 움직이는 애니메이션 */
+@keyframes float-title {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+  100% { transform: translateY(0); }
+}
+
+/* 서브텍스트 디자인 */
+header.hero p {
+  margin-top: 1rem;
+  font-size: 1.1rem;
+  background: rgba(255,255,255,0.5);
+  padding: 0.7rem 1.4rem;
+  border-radius: 16px;
+  border: 1px solid #ffffff80;
+  backdrop-filter: blur(15px); /* 유리 느낌 */
+}
+
+
+
+/* ===========================
+   ⭐ 메인 레이아웃
+   =========================== */
+main {
+  width: min(1100px, 90%);
+  margin: 0 auto;
+  padding-bottom: 5rem;
+}
+
+
+/* ===========================
+   ⭐ Day 섹션 스타일
+   =========================== */
+section.timeline-day {
+  padding: 4rem 0;
+}
+
+/* 날짜 제목 스타일 */
+section.timeline-day h2 {
+  font-family: "Playfair Display", serif;
+  font-size: 2rem;
+  color: #fff;
+
+  /* ✨ Glow 효과 */
+  text-shadow: 0 0 16px rgba(150, 100, 255, 0.9);
+
+  margin-bottom: 0.5rem;
+}
+
+.day-subtitle {
+  background: rgba(255,255,255,0.7);
+  padding: 0.4rem 1rem;
+  border-radius: 12px;
+  display: inline-block;
+  font-size: 0.9rem;
+}
+
+
+/* ===========================
+   ⭐ 카드 레이아웃
+   =========================== */
+.memory-grid {
+  margin-top: 2rem;
+
+  /* 자동반응형 카드 배치 */
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.6rem;
+}
+
+
+/* ===========================
+   ⭐ Memory Card (Glassmorphism)
+   =========================== */
+article.memory-card {
+  background: var(--glass-bg); /* 투명 유리 배경 */
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(15px);
+  border-radius: 24px;
+  padding: 1.4rem;
+
+  /* 스크롤 등장 전 상태 */
+  opacity: 0;
+  transform: translateY(40px);
+  transition: 0.8s ease;
+}
+
+/* 스크롤에 의해 화면에 들어오면 */
+article.memory-card.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* 카드 hover 효과 (살짝 떠오르는 느낌) */
+article.memory-card:hover {
+  transform: translateY(-6px) scale(1.03);
+  box-shadow: 0 20px 40px rgba(30,20,60,0.4);
+}
+
+
+/* ===========================
+   ⭐ 카드 이미지 스타일
+   =========================== */
+.memory-image-wrap img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+
+  /* 유기적이고 꿈 같은 변형 타원형 */
+  border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+
+  /* 필름 느낌 */
+  filter: contrast(0.9) brightness(1.1);
+
+  box-shadow: 0 15px 30px rgba(50,30,80,0.4);
+  transition: 0.6s ease;
+}
+
+/* hover 시 이미지 확대 */
+article.memory-card:hover img {
+  transform: scale(1.04);
+}
