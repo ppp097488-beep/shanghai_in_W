@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>꿈속에서 다시 걷는 상하이</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Noto+Serif+KR:wght@400;600&display=swap" rel="stylesheet">
+
+  <style>
+    /* ===============================
+       🔮 전역 스타일
+       =============================== */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg-lavender: #d9d4ff;
+      --bg-pink: #ffd6e8;
+      --bg-blue: #cde9ff;
+      --text-main: #1f1b2e;
+      --glass-bg: rgba(255, 255, 255, 0.25);
+      --glass-border: rgba(255, 255, 255, 0.3);
+    }
+
+    body {
+      font-family: "Noto Sans KR", sans-serif;
+      overflow-x: hidden;
+      color: var(--text-main);
+    }
+
+    /* 배경 */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: -10%;
+      z-index: -2;
+      background: conic-gradient(
+        from 200deg at 10% 20%,
+        #ffffff80,
+        var(--bg-pink),
+        var(--bg-lavender),
+        var(--bg-blue),
+        #ffffff90,
+        var(--bg-pink)
+      );
+      filter: blur(45px);
+      transform: scale(1.15);
+    }
+
+    /* 둥둥 떠다니는 오브젝트 */
+    .floating-orb {
+      position: fixed;
+      border-radius: 50%;
+      background: radial-gradient(circle, #ffffff, #ffffff00);
+      opacity: 0.35;
+      z-index: -1;
+      animation: float-orb 18s ease-in-out infinite alternate;
+    }
+    .orb-1 { width: 220px; height: 220px; top: 10%; left: 5%; animation-delay: -4s; }
+    .orb-2 { width: 260px; height: 260px; bottom: 5%; right: 8%; animation-delay: -8s; }
+    .orb-3 { width: 160px; height: 160px; top: 45%; right: 20%; animation-duration: 22s; }
+
+    @keyframes float-orb {
+      0% { transform: translate(0,0); }
+      50% { transform: translate(20px,-20px) scale(1.1); }
+      100% { transform: translate(-10px,15px) scale(0.95); }
+    }
+
+    /* HERO */
+    header.hero {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 2rem;
+    }
+
+    header.hero h1 {
+      font-family: "Playfair Display", "Noto Serif KR", serif;
+      font-size: 3rem;
+      color: #fff;
+      text-shadow: 0 0 18px rgba(120, 80, 255, 0.8);
+      animation: float-title 6s ease-in-out infinite;
+    }
+
+    @keyframes float-title {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-12px); }
+      100% { transform: translateY(0); }
+    }
+
+    header.hero p {
+      margin-top: 1rem;
+      font-size: 1.1rem;
+      background: rgba(255,255,255,0.5);
+      padding: 0.7rem 1.4rem;
+      border-radius: 16px;
+      border: 1px solid #ffffff80;
+      backdrop-filter: blur(15px);
+    }
+
+    /* MAIN LAYOUT */
+    main { width: min(1100px, 90%); margin: 0 auto; padding-bottom: 5rem; }
+
+    /* Day Sections */
+    section.timeline-day { padding: 4rem 0; }
+    section.timeline-day h2 {
+      font-family: "Playfair Display", serif;
+      font-size: 2rem;
+      color: #fff;
+      margin-bottom: 0.5rem;
+      text-shadow: 0 0 16px rgba(150, 100, 255, 0.9);
+    }
+
+    .day-subtitle {
+      background: rgba(255,255,255,0.7);
+      padding: 0.4rem 1rem;
+      border-radius: 12px;
+      display: inline-block;
+      font-size: 0.9rem;
+    }
+
+    .memory-grid {
+      margin-top: 2rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.6rem;
+    }
+
+    /* Memory Cards */
+    article.memory-card {
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      backdrop-filter: blur(15px);
+      border-radius: 24px;
+      padding: 1.4rem;
+      opacity: 0;
+      transform: translateY(40px);
+      transition: 0.8s ease;
+    }
+
+    article.memory-card.in-view {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    article.memory-card:hover {
+      transform: translateY(-6px) scale(1.03);
+      box-shadow: 0 20px 40px rgba(30,20,60,0.4);
+    }
+
+    .memory-image-wrap img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+      filter: contrast(0.9) brightness(1.1);
+      box-shadow: 0 15px 30px rgba(50,30,80,0.4);
+      transition: 0.6s ease;
+    }
+
+    article.memory-card:hover img { transform: scale(1.04); }
+
+  </style>
+</head>
+
+<body>
+
+  <!-- Floating orbs -->
+  <div class="floating-orb orb-1"></div>
+  <div class="floating-orb orb-2"></div>
+  <div class="floating-orb orb-3"></div>
+
+  <main>
+
+    <!-- ===================================
+         ⭐ HERO
+         =================================== -->
+    <header class="hero">
+      <h1>우리의 꿈같던 상하이</h1>
+      <p>꿈속에서 다시 걷는 상하이의 기억을 타임라인으로 기록했어요.</p>
+      <!-- 민정*가현*유빈*윤서 -->
+    </header>
+
+    <!-- ===================================
+         ⭐ DAY 0 — 여행 전 설렘 (추가된 섹션)
+         =================================== -->
+    <section id="day0" class="timeline-day">
+      <h2>Day 0 — 여행 전 설렘</h2>
+      <span class="day-subtitle">옷 쇼핑 · 여행 계획 · 짐싸기</span>
+
+      <div class="memory-grid">
+
+        <!-- 카드 1: 옷 쇼핑 -->
+        <article class="memory-card">
+          <div class="memory-image-wrap">
+            <img src=C:\Users\LG\OneDrive\Desktop\shanghai_project\쇼핑걸.jpg alt="여행 전 옷 쇼핑">
+          </div>
+          <h3>설레는 여행 준비, 옷 쇼핑</h3>
+          <p>
+            여행 사진을 예쁘게 찍기 위해 고르고 또 골랐던 옷들.
+          </p>
+        </article>
+
+        <!-- 카드 2: 여행 계획 짜기 -->
+        <article class="memory-card">
+          <div class="memory-image-wrap">
+            <img src=C:\Users\LG\OneDrive\Desktop\shanghai_project\여행 계획.jpg alt="여행 계획">
+          </div>
+          <h3>일정 짜는 순간부터 여행은 시작된다</h3>
+          <p>
+            우리의 여행! 너무 설래!
+          </p>
+        </article>
+
+        <!-- 카드 3: 짐싸기 -->
+        <article class="memory-card">
+          <div class="memory-image-wrap">
+            <img src=C:\Users\LG\OneDrive\Desktop\shanghai_project\짐싸기.jpg alt="짐싸기">
+          </div>
+          <h3>캐리어에 설렘을 가득 담다</h3>
+          <p>이거 넣을까, 말까, 넣을까, 말까. 애매하긴 해~</p>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- ===================================
+         ⭐ DAY 1
+         =================================== -->
+    <section id="day1" class="timeline-day">
+      <h2>Day 1 — 빛나는 도시의 밤</h2>
+      <span class="day-subtitle">푸둥공항 → 점도덕 → 홀리랜드 → 동방명주 → 헌지우이치엔 → 와이탄</span>
+
+      <div class="memory-grid">
+
+        <article class="memory-card">
+          <div class="memory-image-wrap">
+            <img src=C:\Users\LG\OneDrive\Desktop\shanghai_project\1_공항.jpg alt="푸둥 공항">
+          </div>
+          <h3>푸둥공항에서 마주한 공기</h3>
+          <p>도착 직후부터 느껴지던 설렘.</p>
+        </article>
+
+        <article class="memory-card">
+          <div class="memory-image-wrap">
+            <img src=C:\Users\LG\OneDrive\Desktop\shanghai_project\1_점도덕.jpg alt="점도덕 점심">
+          </div>
+          <h3>첫 한입과 시작된 여행</h3>
+          <p>따끈한 점심으로 에너지 충전 완료!</p>
+        </article>
+
+        <article class="memory-card">
+          <div class="memory-image-wrap">
+            <img src=C:C:\Users\LG\OneDrive\Desktop\shanghai_project\1_수건케이크.jpg alt="홀리랜드">
+          </div>
+          <h3>첫 한입과 시작된 여행</h3>
+          <p>따끈한 점심으로 에너지 충전 완료!</p>
+        </article>
+
+        <article class="memory-card">
+          <div class="memory-image-wrap">
+            <img src=C:\Users\LG\OneDrive\Desktop\shanghai_project\1_동방명주.jpg alt="동방명주">
+            <img src=C:\Users\LG\OneDrive\Desktop\shanghai_project\1_동방구명주.jpg alt="동방명주">
+          </div>
+          <h3>첫 한입과 시작된 여행</h3>
+          <p>따끈한 점심으로 에너지 충전 완료!</p>
+        </article>
+
+        <article class="memory-card">
+          <div class="memory-image-wrap">
+            <img src=C:\Users\LG\OneDrive\Desktop\shanghai_project\1_헌지우이치엔.jpg alt="헌지우이치엔">
+          </div>
+          <h3>첫 한입과 시작된 여행</h3>
+          <p>따끈한 점심으로 에너지 충전 완료!</p>
+        </article>
+
+        <article class="memory-card">
+          <div class="memory-image-wrap">
+            <img src=C:\Users\LG\OneDrive\Desktop\shanghai_project\1_와이탄.jpg alt="와이탄">
+            <img src=C:\Users\LG\OneDrive\Desktop\shanghai_project\1_와이라노탄.jpg alt="와이탄">
+          </div>
+          <h3>첫 한입과 시작된 여행</h3>
+          <p>따끈한 점심으로 에너지 충전 완료!</p>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- ===================================
+         ⭐ DAY 2
+         =================================== -->
+    <section id="day2" class="timeline-day">
+      <h2>Day 2 — 시간이 멈춘 옛 풍경</h2>
+      <span class="day-subtitle">주자자오 → 우캉멘션 → 신천지 → 티엔즈팡 → 하이디라오 → 예원</span>
+
+      <div class="memory-grid">
+
+        <article class="memory-card">
+          <div class="memory-image-wrap">
+            <img src=C:\Users\LG\OneDrive\Desktop\shanghai_project\1_주자자오.jpg alt="주자자오">
+          </div>
+          <h3>물 위에 떠 있는 풍경</h3>
+          <p>수향마을의 잔잔한 물길을 걷던 날.</p>
+        </article>
+
+        <article class="memory-card">
+          <div class="memory-image-wrap">
+            <img src=C:\Users\LG\OneDrive\Desktop\shanghai_project\2_우캉멘션.jpg alt="우캉멘션">
+          </div>
+          <h3>물 위에 떠 있는 풍경</h3>
+          <p>수향마을의 잔잔한 물길을 걷던 날.</p>
+        </article>
+
+        <article class="memory-card">
+          <div class="memory-image-wrap">
+            <img src=C:\Users\LG\OneDrive\Desktop\shanghai_project\2_신천지.jpg alt="신천지">
+          </div>
+          <h3>물 위에 떠 있는 풍경</h3>
+          <p>수향마을의 잔잔한 물길을 걷던 날.</p>
+        </article>
+
+        <article class="memory-card">
+          <div class="memory-image-wrap">
+            <img src=C:\Users\LG\OneDrive\Desktop\shanghai_project\2_티엔즈팡.jpg alt="티엔즈팡">
+          </div>
+          <h3>물 위에 떠 있는 풍경</h3>
+          <p>수향마을의 잔잔한 물길을 걷던 날.</p>
+        </article>
+
+        <article class="memory-card">
+          <div class="memory-image-wrap">
+            <img src=C:\Users\LG\OneDrive\Desktop\shanghai_project\2_하이디라오.jpg alt="하이디라오">
+          </div>
+          <h3>물 위에 떠 있는 풍경</h3>
+          <p>수향마을의 잔잔한 물길을 걷던 날.</p>
+        </article>
+
+        <article class="memory-card">
+          <div class="memory-image-wrap">
+            <img src=C:\Users\LG\OneDrive\Desktop\shanghai_project\2_예원.jpg alt="예원">
+          </div>
+          <h3>물 위에 떠 있는 풍경</h3>
+          <p>수향마을의 잔잔한 물길을 걷던 날.</p>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- ===================================
+         ⭐ DAY 3
+         =================================== -->
+    <section id="day3" class="timeline-day">
+      <h2>Day 3 — 환상과 마법의 세계</h2>
+      <span class="day-subtitle">디즈니랜드 → 불꽃놀이</span>
+
+      <div class="memory-grid">
+
+        <article class="memory-card">
+          <div class="memory-image-wrap">
+            <img src=C:\Users\LG\OneDrive\Desktop\shanghai_project\3_디쥬니.jpg alt="디즈니랜드">
+            <img src=C:\Users\LG\OneDrive\Desktop\shanghai_project\3_디지니.jpg alt="디즈니랜드">
+          </div>
+          <h3>동심으로 돌아간 하루</h3>
+          <p><!-- 🔽 디즈니 설명 텍스트 입력 -->퍼레이드와 조명이 가득했던 날.</p>
+        </article>
+
+        <article class="memory-card">
+          <div class="memory-image-wrap">
+            <img src=C:\Users\LG\OneDrive\Desktop\shanghai_project\3_불꽃놀이.jpg alt="불꽃놀이">
+          </div>
+          <h3>여행을 마무리한 불꽃</h3>
+          <p><!-- 🔽 불꽃놀이 설명 텍스트 입력 -->밤하늘 위로 터진 아름다운 엔딩.</p>
+        </article>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- 스크롤 애니메이션 -->
+  <script>
+    const cards = document.querySelectorAll(".memory-card");
+
+    const observer = new IntersectionObserver(
+      (entries, obs) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("in-view");
+            obs.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.2 }
+    );
+
+    cards.forEach(card => observer.observe(card));
+  </script>
+
+</body>
+</html>
