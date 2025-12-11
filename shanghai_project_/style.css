@@ -1,75 +1,65 @@
-/* ===============================
-   🔮 RESET & GLOBAL
-   =============================== */
+/* ==========================================================
+   🌙 DREAMY SHANGHAI — 몽환 · 감성 · 젤리 글래스 스타일
+========================================================== */
+
+/* 기본 초기화 */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
+/* 색상 변수 */
 :root {
-  --bg-lavender: #d8d2ff;
-  --bg-pink: #ffd6e8;
-  --bg-blue: #cde9ff;
-  --text-main: #1f1b2e;
+  --bg-lavender: #eae7ff;
+  --bg-pink: #ffe5ef;
+  --bg-blue: #dff6ff;
+  --text-main: #2c2a4a;
 
   --glass-bg: rgba(255, 255, 255, 0.25);
   --glass-border: rgba(255, 255, 255, 0.35);
 
-  --card-shadow: rgba(30, 20, 60, 0.4);
+  --card-blur: 18px;
 }
 
+/* 전체 폰트 · 스크롤 숨김 */
 body {
   font-family: "Noto Sans KR", sans-serif;
   overflow-x: hidden;
   color: var(--text-main);
-  position: relative;
+  background: radial-gradient(circle at 20% 30%, #ffe6f1 0%, #e3d4ff 25%, #c9f0ff 60%, #f0e9ff 100%);
+  background-attachment: fixed;
+  animation: dreamyMove 14s infinite alternate ease-in-out;
 }
 
-/* ===============================
-   🌙 DREAMY BACKGROUND
-   =============================== */
-body::before {
-  content: "";
-  position: fixed;
-  inset: -10%;
-  z-index: -2;
-  background: conic-gradient(
-    from 200deg at 10% 20%,
-    #ffffff80,
-    var(--bg-pink),
-    var(--bg-lavender),
-    var(--bg-blue),
-    #ffffff90,
-    var(--bg-pink)
-  );
-  filter: blur(45px);
-  transform: scale(1.15);
+/* 배경 몽환 애니메이션 */
+@keyframes dreamyMove {
+  0% { background-position: 0% 0%; }
+  100% { background-position: 100% 100%; }
 }
 
-/* 흐르는 빛 오브젝트 */
+/* 둥둥 떠다니는 오브젝트 */
 .floating-orb {
   position: fixed;
   border-radius: 50%;
-  background: radial-gradient(circle, #ffffff, #ffffff00);
-  opacity: 0.35;
+  background: radial-gradient(circle, #ffffffcc, #ffffff33);
+  opacity: 0.22;
   z-index: -1;
   animation: float-orb 18s ease-in-out infinite alternate;
 }
-
 .orb-1 { width: 220px; height: 220px; top: 10%; left: 5%; animation-delay: -4s; }
 .orb-2 { width: 260px; height: 260px; bottom: 5%; right: 8%; animation-delay: -8s; }
 .orb-3 { width: 160px; height: 160px; top: 45%; right: 20%; animation-duration: 22s; }
 
 @keyframes float-orb {
-  0% { transform: translate(0,0); }
-  50% { transform: translate(20px,-20px) scale(1.1); }
-  100% { transform: translate(-10px,15px) scale(0.95); }
+  0% { transform: translateY(0) scale(1); }
+  50% { transform: translate(-20px) scale(1.05); }
+  100% { transform: translateY(0) scale(1); }
 }
 
-/* ===============================
-   ⭐ HERO (첫 화면)
-   =============================== */
+/* ===========================
+   🌙 HERO (메인 제목)
+=========================== */
 header.hero {
   height: 100vh;
   display: flex;
@@ -83,8 +73,10 @@ header.hero {
 header.hero h1 {
   font-family: "Playfair Display", "Noto Serif KR", serif;
   font-size: 3rem;
-  color: #ffffff;
-  text-shadow: 0 0 18px rgba(120, 80, 255, 0.8);
+  color: #fff;
+  text-shadow:
+    0 0 18px rgba(120, 80, 255, 0.8),
+    0 0 30px rgba(180, 130, 255, 0.6);
   animation: float-title 6s ease-in-out infinite;
 }
 
@@ -97,47 +89,51 @@ header.hero h1 {
 header.hero p {
   margin-top: 1rem;
   font-size: 1.1rem;
-  background: rgba(255, 255, 255, 0.5);
+  background: rgba(255,255,255,0.5);
   padding: 0.7rem 1.4rem;
   border-radius: 16px;
   border: 1px solid #ffffff80;
   backdrop-filter: blur(15px);
 }
 
-/* ===============================
-   ⭐ MAIN LAYOUT
-   =============================== */
+/* ===========================
+   🌙 메인 레이아웃
+=========================== */
 main {
-  width: min(1100px, 90%);
+  width: min(1100px, 92%);
   margin: 0 auto;
   padding-bottom: 5rem;
+  font-family: 'Pretendard', sans-serif;
 }
 
-/* ===============================
-   ⭐ DAY TITLE
-   =============================== */
+/* ===========================
+   🌙 DAY 섹션
+=========================== */
 section.timeline-day {
   padding: 4rem 0;
+  position: relative;
 }
 
 section.timeline-day h2 {
   font-family: "Playfair Display", serif;
   font-size: 2.6rem;
   color: #fff;
-  text-shadow: 
+  text-shadow:
     0 0 14px rgba(255, 180, 255, 0.8),
     0 0 30px rgba(150, 120, 255, 0.6),
     0 0 60px rgba(255, 200, 255, 0.4);
   margin-bottom: 1rem;
+  backdrop-filter: blur(4px);
 }
 
+/* 젤리 스티커 서브타이틀 */
 .day-subtitle {
   display: inline-block;
   padding: 0.5rem 1.2rem;
   background: rgba(255,255,255,0.25);
   border-radius: 18px;
-  font-size: 0.95rem;
   color: #ffffff;
+  font-size: 0.95rem;
   border: 1px solid rgba(255,255,255,0.45);
   box-shadow: 0 8px 18px rgba(255,255,255,0.25);
   backdrop-filter: blur(10px);
@@ -145,9 +141,9 @@ section.timeline-day h2 {
   letter-spacing: 0.5px;
 }
 
-/* ===============================
-   ⭐ MEMORY GRID
-   =============================== */
+/* ===========================
+   🌙 카드 그리드
+=========================== */
 .memory-grid {
   margin-top: 2rem;
   display: grid;
@@ -155,19 +151,19 @@ section.timeline-day h2 {
   gap: 1.6rem;
 }
 
-/* ===============================
-   ⭐ MEMORY CARD
-   =============================== */
+/* ===========================
+   🌙 Memory Card
+=========================== */
 article.memory-card {
   background: var(--glass-bg);
   border: 1px solid var(--glass-border);
-  backdrop-filter: blur(15px);
+  backdrop-filter: blur(var(--card-blur));
   border-radius: 24px;
   padding: 1.4rem;
+
   opacity: 0;
   transform: translateY(40px);
   transition: 0.8s ease;
-  position: relative;
 }
 
 article.memory-card.in-view {
@@ -177,20 +173,17 @@ article.memory-card.in-view {
 
 article.memory-card:hover {
   transform: translateY(-6px) scale(1.03);
-  box-shadow: 0 20px 40px var(--card-shadow);
+  box-shadow:
+    0 20px 40px rgba(30,20,60,0.4),
+    0 0 40px rgba(200,150,255,0.3);
 }
 
-/* ===============================
-   ⭐ MEMORY CARD IMAGE
-   =============================== */
+/* 이미지 */
 .memory-image-wrap img {
   width: 100%;
   height: 180px;
   object-fit: cover;
-
-  /* 몽환적 유기곡선 */
   border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
-
   filter: contrast(0.9) brightness(1.1);
   box-shadow: 0 15px 30px rgba(50,30,80,0.4);
   transition: 0.6s ease;
@@ -200,20 +193,7 @@ article.memory-card:hover img {
   transform: scale(1.04);
 }
 
-/* ===============================
-   ⭐ MEDIA QUERY
-   =============================== */
+/* 반응형 */
 @media (max-width: 600px) {
-  .timeline-card {
-    margin-left: 40px;
-    padding: 1.4rem 1.5rem;
-  }
-
-  .timeline-card::before {
-    left: -28px;
-  }
-
-  section.timeline-day h2 {
-    font-size: 2rem;
-  }
+  section.timeline-day h2 { font-size: 2rem; }
 }
